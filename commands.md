@@ -1,0 +1,6 @@
+- install dependencies: npm install
+- start the code in development mode: npm run start
+- run tests: npm run test
+- lint the code: npm run eslint
+- create a production build of the project: npm run build
+- run the production version locally: npm run start-prod
