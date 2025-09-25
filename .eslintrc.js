@@ -48,6 +48,7 @@ module.exports = {
     'react/prop-types': 0
   },
   'ignorePatterns': [
-    '.eslintrc.js'
+    '.eslintrc.js',
+    'cypress/e2e/**',
   ],
 }
