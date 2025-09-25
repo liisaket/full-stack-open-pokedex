@@ -8,6 +8,9 @@ on:
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-latest
+    env:
+      DBUS_SESSION_BUS_ADDRESS: /dev/null
+      NO_AT_BRIDGE: 1
     steps:
       - uses: actions/checkout@v4      
       - uses: actions/setup-node@v4
