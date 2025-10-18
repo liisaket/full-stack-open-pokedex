@@ -57,9 +57,9 @@ jobs:
             details: Build failed
 
   tag_release:
+    runs-on: ubuntu-latest
     uses: actions/checkout@v4
     needs: [simple_deployment_pipeline]
-    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Bump version and push tag
