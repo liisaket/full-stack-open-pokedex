@@ -9,7 +9,7 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  simple_deployment_pipeline:
+  build_and_test:
     runs-on: ubuntu-latest
     env:
       DBUS_SESSION_BUS_ADDRESS: /dev/null
@@ -28,12 +28,6 @@ jobs:
         run: npm run build
       - name: test
         run: npm run test
-      #- name: e2e tests # cypress no longer used
-      #  uses: cypress-io/github-action@v5
-      #  with:
-      #    command: npm run test:e2e
-      #    start: npm run start-prod
-      #    wait-on: http://localhost:5000
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
       - name: Run Playwright tests
@@ -44,12 +38,21 @@ jobs:
           name: playwright-report
           path: playwright-report/
           retention-days: 30
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [build_and_test]
+    steps:
       - name: Deploy app
         if: ${{ github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
         run: flyctl deploy --remote-only
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       
+  notify_success:
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    steps:
       - name: Notify Success
         uses: sarisia/actions-status-discord@v1
         if: ${{ success() && github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
@@ -58,6 +61,10 @@ jobs:
             color: 0x00FF00
             content: A new version of Pokedex deployed
       
+  notify_failure:
+    runs-on: ubuntu-latest
+    needs: [deploy]
+    steps:
       - name: Notify Failure
         uses: sarisia/actions-status-discord@v1
         if: ${{ failure() && github.event_name == 'push' && !contains(join(github.event.commits.*.message, ' '), '#skip') }}
@@ -68,7 +75,7 @@ jobs:
 
   tag_release:
     runs-on: ubuntu-latest
-    needs: [simple_deployment_pipeline]
+    needs: [deploy]
     steps:
       - uses: actions/checkout@v4
       - name: Bump version and push tag
