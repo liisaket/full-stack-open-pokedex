@@ -12,6 +12,5 @@ app.listen(PORT, () => {
 
 app.get('/health', (req, res) => {
   // eslint-disable-next-line no-constant-condition
-  if (true) throw('error...  ') // health check for ex. 12
   res.send('ok')
 })
