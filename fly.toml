@@ -35,4 +35,4 @@ primary_region = 'arn'
   interval = "30s"
   method = "GET"
   timeout = "5s"
-  path = "/"
+  path = "/health"
