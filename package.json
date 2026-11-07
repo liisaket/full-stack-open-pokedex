@@ -60,9 +60,6 @@
   },
   "jest": {
     "testEnvironment": "jsdom",
-    "setupFiles": [
-      "<rootDir>/jest.setup.js"
-    ],
     "testPathIgnorePatterns": [
       "<rootDir>/tests/"
     ]
