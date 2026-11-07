@@ -51,4 +51,9 @@ module.exports = {
     '.eslintrc.js',
     'cypress/e2e/**',
   ],
+    "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }
