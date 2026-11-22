@@ -18,8 +18,10 @@ Start by running `npm install` inside the project folder
 
 `npm run test:e2e` to run playwright end-to-end tests
 
-## Deployed apps
+## Links
 
-Pokedex: https://full-stack-open-pokedex-long-glade-90.fly.dev/
+Pokedex deployed app: https://full-stack-open-pokedex-long-glade-90.fly.dev/
 
-"Your own pipeline" exercise: https://full-stack-open-cicd-slqm1q.fly.dev/
+"Your own pipeline" repository: https://github.com/liisaket/full-stack-open-cicd
+
+& deployed app: https://full-stack-open-cicd-slqm1q.fly.dev/
