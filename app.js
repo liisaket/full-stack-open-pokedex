@@ -12,6 +12,5 @@ app.listen(PORT, () => {
 
 app.get('/health', (req, res) => {
   // eslint-disable-next-line no-constant-condition
-  //res.send('ok')
-  res.status(500).send('Simulate application failure for periodic health check')
+  res.send('ok')
 })
